@@ -1,5 +1,7 @@
+import Timer from "./components/timer/Timer";
+
 const App = () => {
-  return <div>Hello World</div>;
+  return <Timer />;
 };
 
 export default App;
