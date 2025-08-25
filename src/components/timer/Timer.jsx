@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import TimerDisplay from "./TimerDisplay";
 import TimerControls from "./TimerControls";
@@ -6,7 +6,15 @@ import TimerControls from "./TimerControls";
 const Timer = () => {
   const timerId = useRef(null);
 
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(() => {
+    const storedTime = localStorage.getItem("time");
+    return storedTime ? Number(storedTime) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("time", time);
+  }, [time]);
+
   const [isRunning, setIsRunning] = useState(false);
 
   const toogleTimer = () => {
@@ -25,6 +33,7 @@ const Timer = () => {
     setIsRunning(false);
     setTime(0);
     timerId.current = null;
+    localStorage.removeItem("time");
   };
   return (
     <div className="max-w-1/2 bg-gray-50 p-6 shadow-lg rounded-lg m-auto mt-20">
