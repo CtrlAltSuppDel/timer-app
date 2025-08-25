@@ -1,4 +1,4 @@
-const Button = ({ children = "Button text", onClick, style }) => {
+const Button = ({ children = "Button text", onClick, style, ref = null }) => {
   return (
     <button
       className={
@@ -6,6 +6,7 @@ const Button = ({ children = "Button text", onClick, style }) => {
         style
       }
       onClick={() => onClick()}
+      ref={ref}
     >
       {children}
     </button>
